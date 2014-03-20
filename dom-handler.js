@@ -1,17 +1,11 @@
 var Node = require('./dom-node');
 
-var ElementType = {
-	Text: "text", //Text
-	Directive: "directive", //<? ... ?>
-	Comment: "comment", //<!-- ... -->
-	Script: "script", //<script> tags
-	Style: "style", //<style> tags
-	Tag: "tag", //Any tag
-	CDATA: "cdata", //<![CDATA[ ... ]]>
-	
-	isTag: function(elem){
-		return elem.type === "tag" || elem.type === "script" || elem.type === "style";
-	}
+var nodeTypes = {
+	element: 1,
+	text: 3,
+	comment: 8,
+	cdata: 4,
+	documentType: 10
 };
 
 function DomHandler(callback, options, elementCB){
@@ -79,18 +73,12 @@ var domLvl1 = {
 	previousSibling: 'prev',
 	nextSibling: 'next'
 };
-var nodeTypes = {
-	element: 1,
-	text: 3,
-	comment: 8,
-	cdata: 4
-};
 
 DomHandler.prototype.onopentag = function(name, attribs){
 	var lastTag = this._tagStack[this._tagStack.length - 1];
 
 	var node = new Node({
-		type: name === "script" ? ElementType.Script : name === "style" ? ElementType.Style : ElementType.Tag,
+		nodeType: nodeTypes.element,
 		name: name,
 		attribs: attribs,
 		childNodes: [],
@@ -102,7 +90,7 @@ DomHandler.prototype.onopentag = function(name, attribs){
 	if(lastTag){
 		var idx = lastTag.childNodes.length;
 		while(idx > 0){
-			if(ElementType.isTag(lastTag.childNodes[--idx])){
+			if (lastTag.childNodes[--idx].nodeType === nodeTypes.element) {
 				node.previousSibling = lastTag.childNodes[idx];
 				lastTag.childNodes[idx].next = node;
 				break;
@@ -125,13 +113,13 @@ DomHandler.prototype.ontext = function(data){
 		if(
 			(lastTag = this._tagStack[this._tagStack.length - 1]) &&
 			(lastTag = lastTag.childNodes[lastTag.childNodes.length - 1]) &&
-			lastTag.type === ElementType.Text
+			lastTag.nodeType === nodeTypes.text
 		){
 			lastTag.data += data;
 			return;
 		}
 	} else {
-		if(this.dom.length && this.dom[this.dom.length-1].type === ElementType.Text){
+		if(this.dom.length && this.dom[this.dom.length-1].nodeType === nodeTypes.text){
 			this.dom[this.dom.length-1].data += data;
 			return;
 		}
@@ -139,21 +127,21 @@ DomHandler.prototype.ontext = function(data){
 
 	this._addDomElement({
 		data: data,
-		type: ElementType.Text
+		nodeType: nodeTypes.text,
 	});
 };
 
 DomHandler.prototype.oncomment = function(data){
 	var lastTag = this._tagStack[this._tagStack.length - 1];
 
-	if(lastTag && lastTag.type === ElementType.Comment){
+	if (lastTag && lastTag.nodeType === nodeTypes.comment) {
 		lastTag.data += data;
 		return;
 	}
 
 	var node = new Node({
 		data: data,
-		type: ElementType.Comment
+		nodeType: nodeTypes.comment
 	});
 
 	this._addDomElement(node);
@@ -164,9 +152,9 @@ DomHandler.prototype.oncdatastart = function(){
 	var node = new Node({
 		childNodes: [{
 			data: "",
-			type: ElementType.Text
+			nodeType: nodeTypes.text
 		}],
-		type: ElementType.CDATA
+		nodeType: nodeTypes.cdata
 	});
 
 	this._addDomElement(node);
@@ -181,7 +169,7 @@ DomHandler.prototype.onprocessinginstruction = function(name, data){
 	this._addDomElement({
 		name: name,
 		data: data,
-		type: ElementType.Directive
+		nodeType: nodeTypes.documentType
 	});
 };
 

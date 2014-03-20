@@ -3,6 +3,7 @@ var Node = function(options) {
 	this.parentNode = options.parent || null;
 	this.style = {};
 	this.childNodes = options.childNodes || [];
+	this.nodeType = options.nodeType || 1;
 };
 
 Node.prototype.removeChild = function() {};
