@@ -2,7 +2,7 @@
   "name": "cheerio-next",
   "version": "0.0.1",
   "description": "",
-  "main": "jq.js",
+  "main": "lib/nquery.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

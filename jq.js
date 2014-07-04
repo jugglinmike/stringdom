@@ -1,34 +1,10 @@
-var Node = require('./lib/dom-node');
+'use strict';
 
-var document = new Node({
-	nodeType: 9
-});
-document.documentElement = new Node({
-	tagName: 'html',
-	ownerDocument: document
-});
-document.createElement = function(tagName) {
-	return new Node({
-		tagName: tagName,
-		parent: this,
-		ownerDocument: document
-	});
-};
-document.removeChild = function(childNode) {
+var nQuery = require('./');
 
-};
-document.createDocumentFragment = function() {
-	return new Node({
-		nodeType: 11
-	});
-};
+var $ = nQuery.load("<div>");
 
-var $ = require('jquery')({
-	document: document,
-	addEventListener: function() {}
-});
-
-var $statement = $("<div>")
+var $statement = $('div')
 	.html("The <b>future</b> is <span>something</span>.")
 	.find('span').text('cool')
 	.end();
