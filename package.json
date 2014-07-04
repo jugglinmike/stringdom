@@ -10,6 +10,8 @@
   "license": "MIT-Expat",
   "dependencies": {
     "jquery": "^2.1.0",
-    "htmlparser2": "^3.5.1"
+    "htmlparser2": "^3.5.1",
+    "dom-serializer": "0.0.1",
+    "CSSselect": "^0.7.0"
   }
 }
