@@ -5,8 +5,8 @@ var nQuery = require('./');
 var $ = nQuery.load("<div>");
 
 var $statement = $('div')
-	.html("The <b>future</b> is <span>something</span>.")
-	.find('span').text('cool')
+	.html("The <b>future</b> is <span class='now'>something</span>.")
+	.find('span').toggleClass('bocoup now').text('cool')
 	.end();
 
 console.log($statement.html());
