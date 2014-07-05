@@ -10,3 +10,5 @@ var $statement = $('div')
 	.end();
 
 console.log($statement.html());
+
+console.log(nQuery('<h1>This is a <span>title</span></h1>').html());
