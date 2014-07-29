@@ -2,6 +2,7 @@
   "node": true,
   "globals": {
     "suite": true,
+    "setup": true,
     "test": true,
     "assert": true
   }
