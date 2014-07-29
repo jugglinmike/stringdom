@@ -1,15 +1,14 @@
 {
-  "name": "cheerio-next",
+  "name": "stringdom",
   "version": "0.0.1",
   "description": "",
-  "main": "lib/nquery.js",
+  "main": "lib/index",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mike Pennisi",
   "license": "MIT-Expat",
   "dependencies": {
-    "jquery": "^2.1.0",
     "htmlparser2": "^3.5.1",
     "dom-serializer": "0.0.1",
     "CSSselect": "^0.7.0"
