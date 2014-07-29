@@ -4,7 +4,8 @@
   "description": "",
   "main": "lib/index",
   "scripts": {
-    "test": "mocha --ui tdd test/setup.js test/tests"
+    "test": "mocha --ui tdd test/setup.js test/tests",
+    "lint": "jshint lib test"
   },
   "author": "Mike Pennisi",
   "license": "MIT-Expat",
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "mocha": "^1.20.1",
-    "chai": "^1.9.1"
+    "chai": "^1.9.1",
+    "jshint": "^2.5.2"
   }
 }

@@ -1,0 +1,8 @@
+{
+  "node": true,
+  "globals": {
+    "suite": true,
+    "test": true,
+    "assert": true
+  }
+}
