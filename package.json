@@ -4,7 +4,7 @@
   "description": "",
   "main": "lib/index",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --ui tdd test/setup.js test/tests"
   },
   "author": "Mike Pennisi",
   "license": "MIT-Expat",
@@ -12,5 +12,9 @@
     "htmlparser2": "^3.5.1",
     "dom-serializer": "0.0.1",
     "CSSselect": "^0.7.0"
+  },
+  "devDependencies": {
+    "mocha": "^1.20.1",
+    "chai": "^1.9.1"
   }
 }
