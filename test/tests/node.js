@@ -122,4 +122,25 @@ suite('Node', function() {
 			assert.equal(parent.lastChild, lastChild);
 		});
 	});
+
+	suite('#nextSibling', function() {
+		var parent, firstChild, lastChild;
+
+		setup(function() {
+			parent = new Node();
+			firstChild = new Node();
+			lastChild = new Node();
+			parent.appendChild(firstChild);
+		});
+
+		test('no siblings', function() {
+			assert.equal(firstChild.nextSibling, null);
+		});
+
+		test('one sibling', function() {
+			parent.appendChild(lastChild);
+
+			assert.equal(firstChild.nextSibling, lastChild);
+		});
+	});
 });
