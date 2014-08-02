@@ -21,6 +21,44 @@ suite('Node', function() {
 		});
 	});
 
+	suite('#removeChild', function() {
+		var parent, child, keptChild1, keptChild2;
+
+		setup(function() {
+			parent = new Node();
+			child = new Node();
+			keptChild1 = new Node();
+			keptChild2 = new Node();
+
+			parent.appendChild(keptChild1);
+			parent.appendChild(child);
+			parent.appendChild(keptChild2);
+		});
+
+		test('return value', function() {
+			assert.equal(parent.removeChild(child), child);
+		});
+
+		test('non-child node', function() {
+			var notChild = new Node();
+			assert.throws(function() {
+				parent.removeChild(notChild);
+			});
+		});
+
+		test('childNodes of parent', function() {
+			parent.removeChild(child);
+
+			assert.deepEqual(parent.childNodes, [keptChild1, keptChild2]);
+		});
+
+		test('parentNode of child', function() {
+			parent.removeChild(child);
+
+			assert.equal(child.parentNode, null);
+		});
+	});
+
 	suite('#firstChild', function() {
 		var parent;
 
