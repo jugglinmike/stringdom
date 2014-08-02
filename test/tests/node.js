@@ -19,6 +19,13 @@ suite('Node', function() {
 		test('parentNode of child', function() {
 			assert.equal(child.parentNode, parent);
 		});
+
+		test('childNodes of previous parent', function() {
+			var newParent = new Node();
+			newParent.appendChild(child);
+
+			assert.deepEqual(parent.childNodes, []);
+		});
 	});
 
 	suite('#removeChild', function() {
