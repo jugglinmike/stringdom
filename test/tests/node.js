@@ -3,13 +3,22 @@
 var Node = require('../..').Node;
 
 suite('Node', function() {
-	test('#appendChild', function() {
-		var parent = new Node();
-		var child = new Node();
+	suite('#appendChild', function() {
+		var parent, child;
 
-		parent.appendChild(child);
+		setup(function() {
+			parent = new Node();
+			child = new Node();
+			parent.appendChild(child);
+		});
 
-		assert.deepEqual(parent.childNodes, [child]);
+		test('childNodes of parent', function() {
+			assert.deepEqual(parent.childNodes, [child]);
+		});
+
+		test('parentNode of child', function() {
+			assert.equal(child.parentNode, parent);
+		});
 	});
 
 	suite('#firstChild', function() {
