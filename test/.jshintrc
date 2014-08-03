@@ -1,5 +1,5 @@
 {
-  "node": true,
+  "extends": "../.jshintrc",
   "globals": {
     "suite": true,
     "setup": true,

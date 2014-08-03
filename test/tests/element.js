@@ -1,7 +1,6 @@
 'use strict';
 
 var Document = require('../..').Document;
-var Element = require('../..').Element;
 
 function create(markup) {
 	var d = new Document();
