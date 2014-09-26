@@ -23,5 +23,17 @@ suite('Element', function() {
 
 			assert.equal(elem.ownerDocument, elem.childNodes[0].ownerDocument);
 		});
+
+		test('removal of previous `childNodes`', function() {
+			var elem = create('<div>');
+			var children;
+
+			elem.innerHTML = '<span></span><div></div>';
+			children = elem.childNodes.slice();
+			elem.innerHTML = '';
+
+			assert.equal(children[0].parentNode, null);
+			assert.equal(children[1].parentNode, null);
+		});
 	});
 });
