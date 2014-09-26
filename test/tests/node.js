@@ -3,6 +3,18 @@
 var Node = require('../..').Node;
 
 suite('Node', function() {
+	suite('constructor', function() {
+		test('children linkage', function() {
+			var children = [new Node(), new Node()];
+			var node = new Node({
+				childNodes: children
+			});
+
+			assert.equal(children[0].parentNode, node);
+			assert.equal(children[1].parentNode, node);
+		});
+	});
+
 	suite('#appendChild', function() {
 		var parent, child;
 
