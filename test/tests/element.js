@@ -2,8 +2,8 @@
 
 var Document = require('../..').Document;
 
-function create(markup) {
-	var d = new Document();
+function create(markup, options) {
+	var d = new Document(options);
 	d.documentElement.innerHTML = markup;
 	return  d.documentElement.childNodes[0];
 }
@@ -64,6 +64,22 @@ suite('Element', function() {
 			assert.equal(spans1[0], div.childNodes[0]);
 			assert.equal(spans2.length, 1);
 			assert.equal(spans2[0], div.childNodes[0]);
+		});
+
+		test('case sensitivity in xmlMode', function() {
+			var div = create('<div>', { xmlMode: true });
+			var spans1, spans2, spans3;
+			div.innerHTML = '<sPaN></sPaN>';
+
+			spans1 = div.getElementsByTagName('span');
+			spans2 = div.getElementsByTagName('SPAN');
+			spans3 = div.getElementsByTagName('sPaN');
+
+			assert.equal(div.childNodes.length, 1);
+			assert.equal(spans1.length, 0);
+			assert.equal(spans2.length, 0);
+			assert.equal(spans3.length, 1);
+			assert.equal(spans3[0], div.childNodes[0]);
 		});
 	});
 });
