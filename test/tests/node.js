@@ -15,6 +15,13 @@ suite('Node', function() {
 		});
 	});
 
+	suite('#textContent', function() {
+		var node = new Node();
+		node.textContent = 'some text';
+
+		assert.equal(node.textContent, 'some text');
+	});
+
 	suite('#appendChild', function() {
 		var parent, child;
 
