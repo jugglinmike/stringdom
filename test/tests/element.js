@@ -36,4 +36,34 @@ suite('Element', function() {
 			assert.equal(children[1].parentNode, null);
 		});
 	});
+
+	suite('#getElementsByTagName', function() {
+		test('nested elements', function() {
+			var div = create('<div>');
+			var ps;
+			div.innerHTML = '<div><p></p></div><ul><li><p></p></li></ul><p></p>';
+
+			ps = div.getElementsByTagName('p');
+
+			assert.equal(ps.length, 3);
+			assert.equal(ps[0], div.childNodes[0].childNodes[0]);
+			assert.equal(ps[1], div.childNodes[1].childNodes[0].childNodes[0]);
+			assert.equal(ps[2], div.childNodes[2]);
+		});
+
+		test('case insensitivity', function() {
+			var div = create('<div>');
+			var spans1, spans2;
+			div.innerHTML = '<sPaN></sPaN>';
+
+			spans1 = div.getElementsByTagName('span');
+			spans2 = div.getElementsByTagName('SPAN');
+
+			assert.equal(div.childNodes.length, 1);
+			assert.equal(spans1.length, 1);
+			assert.equal(spans1[0], div.childNodes[0]);
+			assert.equal(spans2.length, 1);
+			assert.equal(spans2[0], div.childNodes[0]);
+		});
+	});
 });
