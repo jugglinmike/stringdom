@@ -5,7 +5,8 @@
   "main": "lib/index",
   "scripts": {
     "test-unit": "mocha --ui tdd test/setup.js test/unit",
-    "test": "npm run test-unit",
+    "test-functional": "mocha --ui tdd test/setup.js test/functional",
+    "test": "npm run test-unit && npm run test-functional",
     "lint": "jshint lib test"
   },
   "author": "Mike Pennisi",

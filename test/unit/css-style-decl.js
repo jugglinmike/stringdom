@@ -1,47 +1,59 @@
 'use strict';
 
 var SD = require('../../lib/css-style-decl');
-var create = require('../create');
 
 suite('CSSStyleDeclaration', function() {
 	setup(function() {
-		this.elem = create('<div>');
-		this.sd = new SD(this.elem);
+		this.sd = new SD();
 	});
 	suite('#getPropertyValue', function() {
 		test('returns `null` for unrecognized values', function() {
 			assert.equal(this.sd.getPropertyValue('color'), null);
 		});
 
-		test('returns the string value of inline styles', function() {
-			this.elem = create('<div style="color: red;">');
-			this.sd = new SD(this.elem);
-			assert.equal(this.sd.getPropertyValue('color'), 'red');
+		test('returns `null` for inherited values', function() {
+			assert.equal(this.sd.getPropertyValue('toString'), null);
+		});
+
+		suite('initial values', function() {
+			test('single value with trailing semicolon', function() {
+				this.sd = new SD('color: red;');
+				assert.equal(this.sd.getPropertyValue('color'), 'red');
+			});
+
+			test('single value without trailing semicolon', function() {
+				this.sd = new SD('color: red');
+				assert.equal(this.sd.getPropertyValue('color'), 'red');
+			});
+
+			test('multiple values', function() {
+				this.sd = new SD('color: red;display: block;');
+
+				assert.equal(this.sd.getPropertyValue('color'), 'red');
+				assert.equal(this.sd.getPropertyValue('display'), 'block');
+			});
+
+			test('multiple values with extra whitespace', function() {
+				this.sd = new SD('  color  : blue ; display : inline ; ');
+
+				assert.equal(this.sd.getPropertyValue('color'), 'blue');
+				assert.equal(this.sd.getPropertyValue('display'), 'inline');
+			});
 		});
 	});
 
 	suite('#setProperty', function() {
-		function hasStyle(styleStr, attr, val) {
-			var regexp = new RegExp(
-				'\\b' + attr + '\\s*:\\s*' + val + '\\s*(;|$)'
-			);
-			assert(
-				regexp.test(styleStr),
-				'Style string "' + styleStr +
-					'" should contain the declaration: `' + attr + ': ' + val
-					+ ';`'
-			);
-		}
+		test('correctly sets valid properties', function() {
+			this.sd.setProperty('color', 'green');
 
-		test('adds new declarations to element\'s `style` attribute', function() {
-			this.sd.setProperty('color', 'blue');
-			hasStyle(this.elem.getAttribute('style'), 'color', 'blue')
+			assert.equal(this.sd.color, 'green');
 		});
 
-		test('updates existing declarations on element\'s `style` attribute', function() {
-			this.elem.setAttribute('style', 'color: green;');
-			this.sd.setProperty('color', 'orange');
-			hasStyle(this.elem.getAttribute('style'), 'color', 'orange')
+		test('ignores invalid properties', function() {
+			var oldToString = this.sd.toString;
+			this.sd.setProperty('toString', 'something bad');
+
+			assert.equal(this.sd.toString, oldToString);
 		});
 	});
 });
