@@ -4,7 +4,8 @@
   "description": "",
   "main": "lib/index",
   "scripts": {
-    "test": "mocha --ui tdd test/setup.js test/tests",
+    "test-unit": "mocha --ui tdd test/setup.js test/unit",
+    "test": "npm run test-unit",
     "lint": "jshint lib test"
   },
   "author": "Mike Pennisi",
