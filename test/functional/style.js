@@ -9,8 +9,8 @@ function hasStyle(styleStr, attr, val) {
 	assert(
 		regexp.test(styleStr),
 		'Style string "' + styleStr +
-			'" should contain the declaration: `' + attr + ': ' + val
-			+ ';`'
+			'" should contain the declaration: `' + attr + ': ' + val +
+			';`'
 	);
 }
 

@@ -1,7 +1,5 @@
 'use strict';
 
-var Document = require('../..').Document;
-
 var create = require('../create');
 
 suite('Element', function() {
