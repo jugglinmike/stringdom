@@ -2,11 +2,7 @@
 
 var Document = require('../..').Document;
 
-function create(markup, options) {
-	var d = new Document(options);
-	d.documentElement.innerHTML = markup;
-	return  d.documentElement.childNodes[0];
-}
+var create = require('../create');
 
 suite('Element', function() {
 	test('#className', function() {
