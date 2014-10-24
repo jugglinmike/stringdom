@@ -30,4 +30,11 @@ suite('inline styling', function() {
 
 		hasStyle(this.div.getAttribute('style'), 'color', 'red');
 	});
+
+	test('`style` properties can be unset with `null` value', function() {
+		this.div.style.color = 'red';
+		this.div.style.color = null;
+
+		assert.equal(this.div.getAttribute('style'), '');
+	});
 });
