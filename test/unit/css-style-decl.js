@@ -39,6 +39,12 @@ suite('CSSStyleDeclaration', function() {
 				assert.equal(this.sd.getPropertyValue('color'), 'blue');
 				assert.equal(this.sd.getPropertyValue('display'), 'inline');
 			});
+
+			test('values containing colons', function() {
+				this.sd = new SD('content: ":";');
+
+				assert.equal(this.sd.getPropertyValue('content'), '":"');
+			});
 		});
 	});
 
