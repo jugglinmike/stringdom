@@ -45,6 +45,17 @@ suite('CSSStyleDeclaration', function() {
 
 				assert.equal(this.sd.getPropertyValue('content'), '":"');
 			});
+
+			test('hyphenated properties', function() {
+				this.sd = new SD('background-color: red; margin-left: 0;');
+
+				assert.equal(
+					this.sd.getPropertyValue('backgroundColor'), 'red'
+				);
+				assert.equal(
+					this.sd.getPropertyValue('marginLeft'), '0'
+				);
+			});
 		});
 	});
 
