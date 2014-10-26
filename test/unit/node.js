@@ -166,4 +166,29 @@ suite('Node', function() {
 			assert.equal(parent.nextSibling, null);
 		});
 	});
+
+	suite('#previousSibling', function() {
+		var parent, firstChild, lastChild;
+
+		setup(function() {
+			parent = new Node();
+			firstChild = new Node();
+			lastChild = new Node();
+			parent.appendChild(firstChild);
+		});
+
+		test('no siblings', function() {
+			assert.equal(firstChild.previousSibling, null);
+		});
+
+		test('one sibling', function() {
+			parent.appendChild(lastChild);
+
+			assert.equal(lastChild.previousSibling, firstChild);
+		});
+
+		test('no parents', function() {
+			assert.equal(parent.previousSibling, null);
+		});
+	});
 });
