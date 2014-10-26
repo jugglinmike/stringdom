@@ -31,6 +31,47 @@ suite('Element', function() {
 		});
 	});
 
+	suite('outerHTML', function() {
+		test('creation of new element', function() {
+			var parent = create('<div><div></div></div>');
+			var origElem = parent.childNodes[0];
+			var newElem;
+
+			origElem.outerHTML = '<span></span>';
+
+			newElem = parent.childNodes[0];
+
+			assert.notEqual(origElem, newElem);
+			assert.equal(newElem.parentNode, parent);
+		});
+
+		test('sibling linkages', function() {
+			var parent = create('<ul><li></li><li></li><li></li></ul>');
+			var origElem = parent.childNodes[1];
+			var newElem;
+
+			origElem.outerHTML = '<li></li>';
+
+			newElem = parent.childNodes[1];
+
+			assert.equal(origElem.nextSibling, null);
+			assert.equal(origElem.previousSibling, null);
+			assert.equal(newElem.nextSibling, parent.childNodes[2]);
+			assert.equal(newElem.previousSibling, parent.childNodes[0]);
+			assert.equal(parent.childNodes[0].nextSibling, newElem);
+			assert.equal(parent.childNodes[2].previousSibling, newElem);
+		});
+
+		test('removal of previous element', function() {
+			var parent = create('<div><div></div></div>');
+			var origElem = parent.childNodes[0];
+
+			origElem.outerHTML = '<span></span>';
+
+			assert.equal(origElem.parentNode, null);
+		});
+	});
+
 	suite('#getElementsByTagName', function() {
 		test('nested elements', function() {
 			var div = create('<div>');
