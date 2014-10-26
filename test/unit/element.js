@@ -72,6 +72,29 @@ suite('Element', function() {
 		});
 	});
 
+	suite('textContent', function() {
+		test('creation of new Text node child', function() {
+			var div = create('<div></div>');
+
+			div.textContent = 'some new text';
+
+			assert.equal(div.childNodes.length, 1);
+			assert.equal(div.childNodes[0].nodeType, 3);
+			assert.equal(div.textContent, 'some new text');
+		});
+
+		test('removal of previous children', function() {
+			var div = create('<div><p>paragraph 1</p><p>paragraph 2</p></div>');
+			var oldChild1 = div.childNodes[0];
+			var oldChild2 = div.childNodes[1];
+
+			div.textContent = 'some new text';
+
+			assert.equal(oldChild1.parentNode, null);
+			assert.equal(oldChild2.parentNode, null);
+		});
+	});
+
 	suite('#getElementsByTagName', function() {
 		test('nested elements', function() {
 			var div = create('<div>');

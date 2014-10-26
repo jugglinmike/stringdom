@@ -16,10 +16,27 @@ suite('Node', function() {
 	});
 
 	suite('#textContent', function() {
-		var node = new Node();
-		node.textContent = 'some text';
+		test('retrieval from leaf', function() {
+			var node = new Node();
+			node.textContent = 'some text';
 
-		assert.equal(node.textContent, 'some text');
+			assert.equal(node.textContent, 'some text');
+		});
+
+		test('retrieval from parent', function() {
+			var parent = new Node();
+			var child1 = new Node();
+			var child2 = new Node();
+			child1.textContent = 'Hello ';
+			child2.textContent = 'world';
+			parent.appendChild(child1);
+			parent.appendChild(child2);
+
+			assert.equal(parent.textContent, 'Hello world');
+		});
+
+		test('setting simple text');
+		test('setting text that contains markup');
 	});
 
 	suite('#appendChild', function() {
