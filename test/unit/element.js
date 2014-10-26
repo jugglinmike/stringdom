@@ -11,11 +11,17 @@ suite('Element', function() {
 	suite('innerHTML', function() {
 		test('`ownerDocument` attribute', function() {
 			var elem = create('<div>');
-			elem.ownerDocument = {};
+			var child;
 
 			elem.innerHTML = '<span></span>';
 
-			assert.equal(elem.ownerDocument, elem.childNodes[0].ownerDocument);
+			child = elem.childNodes[0];
+
+			assert(elem.ownerDocument);
+			assert.equal(elem.ownerDocument, child.ownerDocument);
+			elem.removeChild(child);
+
+			assert.equal(elem.ownerDocument, child.ownerDocument);
 		});
 
 		test('removal of previous `childNodes`', function() {
