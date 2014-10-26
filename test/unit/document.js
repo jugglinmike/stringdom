@@ -1,7 +1,7 @@
 'use strict';
 var stringdom = require('../..');
+
 var Node = stringdom.Node;
-var Element = stringdom.Element;
 var Document = stringdom.Document;
 
 suite('Document', function() {
@@ -9,24 +9,7 @@ suite('Document', function() {
 		var document = new Document();
 
 		assert.instanceOf(document, Node);
-		assert.instanceOf(document.documentElement, Element);
-	});
-
-	test('#createElement', function() {
-		var document = new Document();
-		var ul = document.createElement('ul');
-
-		assert.instanceOf(ul, Element);
-		assert.equal(ul.nodeName, 'ul');
-		assert.equal(ul.ownerDocument, document);
-	});
-
-	test('#createDocumentFragment', function() {
-		var document = new Document();
-		var fragment = document.createDocumentFragment();
-
-		assert.instanceOf(fragment, Node);
-		assert.equal(fragment.nodeType, 11);
-		assert.equal(fragment.ownerDocument, document);
+		assert.ok(document.documentElement, 'creates a document element');
+		assert.ok(document.documentElement.nodeType, 1);
 	});
 });
