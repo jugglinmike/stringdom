@@ -1,6 +1,6 @@
 'use strict';
 
-var create = require('../create');
+var create = require('../../create');
 
 suite('Element', function() {
 	test('#className', function() {

@@ -1,12 +1,12 @@
 'use strict';
 
 var Document = require('../../lib/document');
-var Node = require('../../lib/dom-node');
-var Element = require('../../lib/dom-element');
+var Node = require('../../lib/node');
+var Element = require('../../lib/nodes/element');
 var ElementTypes = {
-	Input: require('../../lib/elements/input'),
-	Option: require('../../lib/elements/option'),
-	Select: require('../../lib/elements/select')
+	Input: require('../../lib/nodes/elements/input'),
+	Option: require('../../lib/nodes/elements/option'),
+	Select: require('../../lib/nodes/elements/select')
 };
 
 suite('document', function() {
