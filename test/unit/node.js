@@ -161,5 +161,9 @@ suite('Node', function() {
 
 			assert.equal(firstChild.nextSibling, lastChild);
 		});
+
+		test('no parents', function() {
+			assert.equal(parent.nextSibling, null);
+		});
 	});
 });
