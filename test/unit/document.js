@@ -27,5 +27,6 @@ suite('Document', function() {
 
 		assert.instanceOf(fragment, Node);
 		assert.equal(fragment.nodeType, 11);
+		assert.equal(fragment.ownerDocument, document);
 	});
 });
