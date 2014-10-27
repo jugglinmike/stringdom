@@ -146,4 +146,18 @@ suite('Element', function() {
 			assert.equal(spans3[0], div.childNodes[0]);
 		});
 	});
+
+	suite('#cloneNode', function() {
+		test('attribute copying', function() {
+			var div = create('<div data-test="some value">');
+			var cloned = div.cloneNode();
+
+			assert.equal(cloned.tagName, 'div');
+			assert.equal(cloned.getAttribute('data-test'), 'some value');
+
+			cloned.setAttribute('data-test', 'some other value');
+
+			assert.equal(div.getAttribute('data-test'), 'some value');
+		});
+	});
 });

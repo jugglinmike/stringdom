@@ -232,6 +232,60 @@ suite('Node', function() {
 		});
 	});
 
+	suite('#cloneNode', function() {
+		test('attributes', function() {
+			var owner = {};
+			var source = new Node({
+				nodeType: 1,
+				ownerDocument: owner,
+				data: 'some text'
+			});
+			var cloned = source.cloneNode();
+
+			assert.equal(cloned.nodeType, 1);
+			assert.equal(cloned.ownerDocument, owner);
+			assert.equal(cloned.data, 'some text');
+		});
+
+		test('does not copy children by default', function() {
+			var source = new Node();
+			var child = new Node();
+			var cloned;
+
+			source.appendChild(child);
+			cloned = source.cloneNode();
+
+			assert.equal(source.childNodes.length, 1);
+			assert.equal(source.childNodes[0], child);
+			assert.equal(child.parentNode, source);
+			assert.equal(cloned.childNodes.length, 0);
+		});
+
+		test('deep cloning', function() {
+			var owner = {};
+			var source = new Node();
+			var child = new Node({
+				nodeType: 1,
+				ownerDocument: owner
+			});
+			var grandChild = new Node();
+			var cloned;
+
+			source.appendChild(child);
+			child.appendChild(grandChild);
+			cloned = source.cloneNode(true);
+
+			assert.equal(source.childNodes.length, 1);
+			assert.equal(source.childNodes[0], child);
+			assert.equal(child.parentNode, source);
+			assert.equal(cloned.childNodes.length, 1);
+			assert.equal(cloned.childNodes[0].parentNode, cloned);
+			assert.equal(cloned.childNodes[0].nodeType, 1);
+			assert.equal(cloned.childNodes[0].ownerDocument, owner);
+			assert.equal(cloned.childNodes[0].childNodes.length, 1);
+		});
+	});
+
 	suite('#removeChild', function() {
 		var parent, child, keptChild1, keptChild2;
 
