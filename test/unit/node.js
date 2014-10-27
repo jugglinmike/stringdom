@@ -175,6 +175,63 @@ suite('Node', function() {
 		});
 	});
 
+	suite('#replaceChild', function() {
+		var parent, child, newNode, oldParent;
+
+		setup(function() {
+			parent = new Node();
+			child = new Node();
+			newNode = new Node();
+			oldParent = new Node();
+
+			parent.appendChild(child);
+			oldParent.appendChild(newNode);
+		});
+
+		test('valid child', function() {
+			parent.replaceChild(newNode, child);
+
+			assert.equal(parent.childNodes.length, 1);
+			assert.equal(parent.childNodes[0], newNode);
+			assert.equal(child.parentNode, null);
+			assert.equal(newNode.parentNode, parent);
+			assert.equal(oldParent.childNodes.length, 0);
+		});
+
+		test('invalid child', function() {
+			assert.throws(function() {
+				parent.replaceChild(newNode, new Node());
+			});
+		});
+
+		test('detached node', function() {
+			var detachedNode = new Node();
+			parent.replaceChild(detachedNode, child);
+
+			assert.equal(detachedNode.parentNode, parent);
+			assert.equal(parent.childNodes.length, 1);
+			assert.equal(parent.childNodes[0], detachedNode);
+			assert.equal(child.parentNode, null);
+		});
+
+		test('document fragment', function() {
+			var df = new Node({
+				nodeType: 11
+			});
+			var newChild1 = new Node();
+			var newChild2 = new Node();
+			df.appendChild(newChild1);
+			df.appendChild(newChild2);
+
+			parent.replaceChild(df, child);
+
+			assert.equal(parent.childNodes.length, 2);
+			assert.equal(newChild1.parentNode, parent);
+			assert.equal(newChild2.parentNode, parent);
+			assert.equal(df.childNodes.length, 0);
+		});
+	});
+
 	suite('#removeChild', function() {
 		var parent, child, keptChild1, keptChild2;
 
