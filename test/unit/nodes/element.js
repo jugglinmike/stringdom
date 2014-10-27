@@ -99,6 +99,26 @@ suite('Element', function() {
 			assert.equal(oldChild1.parentNode, null);
 			assert.equal(oldChild2.parentNode, null);
 		});
+
+		test('clearing children for empty strings', function() {
+			var div = create('<div><p>paragraph 1</p><p>paragraph 2</p></div>');
+			var oldChild1 = div.childNodes[0];
+			var oldChild2 = div.childNodes[1];
+
+			div.textContent = '';
+
+			assert.equal(div.childNodes.length, 0);
+			assert.equal(oldChild1.parentNode, null);
+			assert.equal(oldChild2.parentNode, null);
+		});
+
+		test('setting with falsey non-string values', function() {
+			var div = create('<div>');
+
+			div.textContent = 0;
+
+			assert.equal(div.childNodes[0].data, '0');
+		});
 	});
 
 	suite('#getElementsByTagName', function() {
