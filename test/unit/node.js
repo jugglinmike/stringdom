@@ -62,6 +62,26 @@ suite('Node', function() {
 
 			assert.deepEqual(parent.childNodes, []);
 		});
+
+		test('fragments', function() {
+			var df = new Node({
+				nodeType: 11
+			});
+			var child2 = new Node();
+			var child3 = new Node();
+			df.appendChild(child2);
+			df.appendChild(child3);
+
+			parent.appendChild(df);
+
+			assert.equal(df.parentNode, null);
+			assert.equal(df.childNodes.length, 0);
+			assert.equal(parent.childNodes.length, 3);
+			assert.equal(parent.childNodes[1], child2);
+			assert.equal(parent.childNodes[2], child3);
+			assert.equal(child2.parentNode, parent);
+			assert.equal(child3.parentNode, parent);
+		});
 	});
 
 	suite('#removeChild', function() {
