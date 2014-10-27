@@ -87,6 +87,7 @@ suite('Element', function() {
 			assert.equal(div.childNodes.length, 1);
 			assert.equal(div.childNodes[0].nodeType, 3);
 			assert.equal(div.textContent, 'some new text');
+			assert.equal(div.childNodes[0].parentNode, div);
 		});
 
 		test('removal of previous children', function() {
