@@ -99,6 +99,82 @@ suite('Node', function() {
 		});
 	});
 
+	suite('#insertBefore', function() {
+		var parent, child1, child2, child3, oldParent, newNode;
+
+		setup(function() {
+			parent = new Node();
+			child1 = new Node();
+			child2 = new Node();
+			child3 = new Node();
+			oldParent = new Node();
+			newNode = new Node();
+			parent.appendChild(child1);
+			parent.appendChild(child2);
+			parent.appendChild(child3);
+			oldParent.appendChild(newNode);
+		});
+
+		test('before first child', function() {
+			parent.insertBefore(newNode, child1);
+
+			assert.equal(parent.childNodes[0], newNode);
+			assert.equal(newNode.parentNode, parent);
+			assert.equal(oldParent.childNodes, 0);
+		});
+
+		test('before middle child', function() {
+			parent.insertBefore(newNode, child2);
+
+			assert.equal(parent.childNodes[1], newNode);
+			assert.equal(newNode.parentNode, parent);
+			assert.equal(oldParent.childNodes, 0);
+		});
+
+		test('before last child', function() {
+			parent.insertBefore(newNode, child3);
+
+			assert.equal(parent.childNodes[2], newNode);
+			assert.equal(newNode.parentNode, parent);
+			assert.equal(oldParent.childNodes.length, 0);
+		});
+
+		test('document fragments', function() {
+			var df = new Node({
+				nodeType: 11
+			});
+			var newNode1 = new Node();
+			var newNode2 = new Node();
+			df.appendChild(newNode1);
+			df.appendChild(newNode2);
+
+			parent.insertBefore(df, child2);
+
+			assert.equal(df.parentNode, null);
+			assert.equal(df.childNodes.length, 0);
+			assert.equal(newNode1.parentNode, parent);
+			assert.equal(newNode2.parentNode, parent);
+			assert.equal(parent.childNodes.length, 5);
+			assert.equal(parent.childNodes[1], newNode1);
+			assert.equal(parent.childNodes[2], newNode2);
+		});
+
+		test('before invalid child', function() {
+			assert.throws(function() {
+				parent.insertBefore(newNode, new Node());
+			});
+		});
+
+		test('before null (appending)', function() {
+			parent.insertBefore(newNode, null);
+
+			assert.equal(parent.childNodes.length, 4);
+			assert.equal(parent.childNodes[3], newNode);
+			assert.equal(newNode.parentNode, parent);
+			assert.equal(oldParent.childNodes.length, 0);
+		});
+	});
+
 	suite('#removeChild', function() {
 		var parent, child, keptChild1, keptChild2;
 
