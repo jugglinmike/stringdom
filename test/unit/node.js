@@ -35,6 +35,21 @@ suite('Node', function() {
 			assert.equal(parent.textContent, 'Hello world');
 		});
 
+		test('removal of existing children', function() {
+			var parent = new Node();
+			var child1 = new Node();
+			var child2 = new Node();
+
+			parent.appendChild(child1);
+			parent.appendChild(child2);
+
+			parent.textContent = '';
+
+			assert.equal(parent.childNodes.length, 0);
+			assert.equal(child1.parentNode, null);
+			assert.equal(child2.parentNode, null);
+		});
+
 		test('setting simple text');
 		test('setting text that contains markup');
 	});
