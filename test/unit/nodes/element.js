@@ -3,6 +3,40 @@
 var create = require('../../create');
 
 suite('Element', function() {
+	suite('getElementsByTagName', function() {
+		var elem;
+
+		setup(function() {
+			elem = create(
+				'<div class="a">' +
+					'<ul class="b c">' +
+						'<li class="c d"></li>' +
+						'<li class="c b"></li>' +
+						'<li class="cd"></li>' +
+					'</ul>' +
+				'</div>'
+			);
+		});
+
+		test('valid tag names', function() {
+			var lis = elem.getElementsByTagName('li');
+
+			assert.equal(lis.length, 3);
+		});
+
+		test('case insensitivity', function() {
+			var lis = elem.getElementsByTagName('lI');
+
+			assert.equal(lis.length, 3);
+		});
+
+		test('invalid tags', function() {
+			var cs = elem.getElementsByTagName('.c');
+
+			assert.equal(cs.length, 0);
+		});
+	});
+
 	test('className', function() {
 		var elem = create('<div class="a b c">');
 		assert.equal(elem.className, 'a b c');
