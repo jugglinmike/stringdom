@@ -3,7 +3,7 @@
 var create = require('../../create');
 
 suite('Element', function() {
-	test('#className', function() {
+	test('className', function() {
 		var elem = create('<div class="a b c">');
 		assert.equal(elem.className, 'a b c');
 	});
