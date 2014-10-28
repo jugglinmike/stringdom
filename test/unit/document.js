@@ -13,6 +13,15 @@ suite('Document', function() {
 		assert.ok(document.documentElement.nodeType, 1);
 	});
 
+	test('specification of `defaultView`', function() {
+		var window = {};
+		var document = new Document({
+			defaultView: window
+		});
+
+		assert.equal(document.defaultView, window);
+	});
+
 	suite('#createTextNode', function() {
 		var document;
 
