@@ -1,6 +1,6 @@
 'use strict';
 
-var Document = require('..').Document;
+var Document = require('..');
 
 module.exports = function(markup, options) {
 	var d = new Document(options);

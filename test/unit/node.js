@@ -1,6 +1,6 @@
 'use strict';
 
-var Node = require('../..').Node;
+var Node = require('../../lib/node');
 
 suite('Node', function() {
 	suite('constructor', function() {

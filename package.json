@@ -2,7 +2,7 @@
   "name": "stringdom",
   "version": "0.0.1",
   "description": "",
-  "main": "lib/index",
+  "main": "lib/document",
   "scripts": {
     "test-unit": "mocha --ui tdd --recursive test/setup.js test/unit",
     "test-functional": "mocha --ui tdd test/setup.js test/functional",

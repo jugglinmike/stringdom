@@ -1,8 +1,7 @@
 'use strict';
-var stringdom = require('../..');
 
-var Node = stringdom.Node;
-var Document = stringdom.Document;
+var Node = require('../../lib/node');
+var Document = require('../..');
 
 suite('Document', function() {
 	test('default behavior', function() {
