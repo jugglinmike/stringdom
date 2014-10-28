@@ -1,13 +1,11 @@
 'use strict';
 
-var Node = require('../../lib/node');
 var Document = require('../..');
 
 suite('Document', function() {
 	test('default behavior', function() {
 		var document = new Document();
 
-		assert.instanceOf(document, Node);
 		assert.ok(document.documentElement, 'creates a document element');
 		assert.ok(document.documentElement.nodeType, 1);
 	});

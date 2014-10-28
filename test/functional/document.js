@@ -10,6 +10,14 @@ var ElementTypes = {
 };
 
 suite('document', function() {
+	suite('constructor', function() {
+		test('creates a Node instance', function() {
+			var document = new Document();
+
+			assert.instanceOf(document, Node);
+		});
+	});
+
 	suite('#createElement', function() {
 		test('generic element', function() {
 			var document = new Document();
