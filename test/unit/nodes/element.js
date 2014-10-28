@@ -3,13 +3,13 @@
 var create = require('../../create');
 
 suite('Element', function() {
-	suite('getElementsByTagName', function() {
+	suite('querying', function() {
 		var elem;
 
 		setup(function() {
 			elem = create(
 				'<div class="a">' +
-					'<ul class="b c">' +
+					'<ul class="b c" id="unordered">' +
 						'<li class="c d"></li>' +
 						'<li class="c b"></li>' +
 						'<li class="cd"></li>' +
@@ -18,22 +18,36 @@ suite('Element', function() {
 			);
 		});
 
-		test('valid tag names', function() {
-			var lis = elem.getElementsByTagName('li');
+		suite('#getElementsByTagName', function() {
+			test('valid tag names', function() {
+				var lis = elem.getElementsByTagName('li');
 
-			assert.equal(lis.length, 3);
+				assert.equal(lis.length, 3);
+			});
+
+			test('case insensitivity', function() {
+				var lis = elem.getElementsByTagName('lI');
+
+				assert.equal(lis.length, 3);
+			});
+
+			test('invalid tags', function() {
+				var cs = elem.getElementsByTagName('.c');
+
+				assert.equal(cs.length, 0);
+			});
 		});
 
-		test('case insensitivity', function() {
-			var lis = elem.getElementsByTagName('lI');
+		suite('#getElementById', function() {
+			test('valid IDs', function() {
+				var ul = elem.getElementById('unordered');
 
-			assert.equal(lis.length, 3);
-		});
+				assert(ul);
+			});
 
-		test('invalid tags', function() {
-			var cs = elem.getElementsByTagName('.c');
-
-			assert.equal(cs.length, 0);
+			test('invalid IDs', function() {
+				assert.equal(elem.getElementById('unordered .c'), null);
+			});
 		});
 	});
 
