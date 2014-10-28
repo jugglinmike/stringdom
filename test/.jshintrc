@@ -1,5 +1,6 @@
 {
   "extends": "../.jshintrc",
+  "evil": true,
   "globals": {
     "suite": true,
     "setup": true,

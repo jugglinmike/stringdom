@@ -19,6 +19,34 @@ suite('Document', function() {
 		assert.equal(document.defaultView, window);
 	});
 
+	suite('#write', function() {
+		test('markup parsing', function() {
+			var document = new Document();
+			var docElem = document.childNodes[0];
+
+			assert.equal(docElem.childNodes.length, 0);
+
+			document.write('<h1>Hello, world!</h1><p>This is a test</p>');
+
+			assert.equal(docElem.childNodes.length, 2);
+		});
+
+		test('removal of previous elements', function() {
+			var document = new Document();
+			var docElem = document.documentElement;
+			var h1;
+
+			document.write('<h1>A test</h1');
+
+			h1 = docElem.childNodes[0];
+
+			document.write('');
+
+			assert.equal(h1.parentNode, null);
+			assert.equal(docElem.childNodes.length, 0);
+		});
+	});
+
 	suite('#createTextNode', function() {
 		var document;
 
