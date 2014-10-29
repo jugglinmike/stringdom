@@ -93,7 +93,16 @@ suite('CSSStyleDeclaration', function() {
 			assert.match(this.sd.toString(), /float:\s*left/);
 		});
 
-		test('falsey values', function() {
+		test('most falsey values', function() {
+			this.sd.margin = false;
+			this.sd.padding = '';
+			this.sd.border = undefined;
+			this.sd.outline = null;
+
+			assert.equal(this.sd.toString(), '');
+		});
+
+		test('`0`', function() {
 			this.sd.margin = 0;
 
 			assert.match(this.sd.toString(), /margin:\s*0/);
