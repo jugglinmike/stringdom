@@ -6,8 +6,11 @@ suite('Document', function() {
 	test('default behavior', function() {
 		var document = new Document();
 
+		assert.ok(document.nodeType, 9);
+		assert.ok(document.nodeName, '#document');
 		assert.ok(document.documentElement, 'creates a document element');
 		assert.ok(document.documentElement.nodeType, 1);
+		assert.ok(document.documentElement.nodeName, 'HTML');
 	});
 
 	test('specification of `defaultView`', function() {
