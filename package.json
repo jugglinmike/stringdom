@@ -1,7 +1,15 @@
 {
   "name": "stringdom",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.1.0",
+  "description": "A W3C DOM implementation powered by text",
+  "homepage": "https://github.com/jugglinmike/stringdom",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jugglinmike/stringdom.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jugglinmike/stringdom/issues"
+  },
   "main": "lib/document",
   "scripts": {
     "test-unit": "mocha --ui tdd --recursive test/setup.js test/unit",
