@@ -92,5 +92,11 @@ suite('CSSStyleDeclaration', function() {
 
 			assert.match(this.sd.toString(), /float:\s*left/);
 		});
+
+		test('falsey values', function() {
+			this.sd.margin = 0;
+
+			assert.match(this.sd.toString(), /margin:\s*0/);
+		});
 	});
 });
