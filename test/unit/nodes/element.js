@@ -220,6 +220,16 @@ suite('Element', function() {
 			assert.equal(spans3.length, 1);
 			assert.equal(spans3[0], div.childNodes[0]);
 		});
+
+		test('star', function() {
+			var div = create('<div><ul></ul><p><a></a></p></div>');
+			var els = div.getElementsByTagName('*');
+
+			assert.equal(els.length, 3);
+			assert.equal(els[0], div.childNodes[0]);
+			assert.equal(els[1], div.childNodes[1]);
+			assert.equal(els[2], div.childNodes[1].childNodes[0]);
+		});
 	});
 
 	suite('#cloneNode', function() {
