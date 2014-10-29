@@ -65,4 +65,23 @@ suite('Document', function() {
 			assert.throws(document.createTextNode.bind(document));
 		});
 	});
+
+	suite('#createElement', function() {
+		var document;
+
+		setup(function() {
+			document = new Document();
+		});
+
+		test('normal operation', function() {
+			var elem = document.createElement('span');
+
+			assert.equal(elem.nodeName, 'span');
+			assert.equal(elem.nodeType, 1);
+		});
+
+		test('insufficient arguments', function() {
+			assert.throws(document.createElement.bind(document));
+		});
+	});
 });
