@@ -73,4 +73,24 @@ suite('CSSStyleDeclaration', function() {
 			assert.equal(this.sd.toString, oldToString);
 		});
 	});
+
+	suite('#toString', function() {
+		test('values set during initialization', function() {
+			var sd = new SD('color: grey;');
+
+			assert.match(sd.toString(), /color:\s*grey/);
+		});
+
+		test('values set dynamically as properties', function() {
+			this.sd.margin = '3px';
+
+			assert.match(this.sd.toString(), /margin:\s*3px/);
+		});
+
+		test('values set via `setProperty`', function() {
+			this.sd.setProperty('float', 'left');
+
+			assert.match(this.sd.toString(), /float:\s*left/);
+		});
+	});
 });
