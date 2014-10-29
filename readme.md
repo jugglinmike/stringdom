@@ -1,4 +1,4 @@
-# Stringdom
+# Stringdom [![Build Status](https://secure.travis-ci.org/jugglinmike/stringdom.svg?branch=master)](http://travis-ci.org/jugglinmike/stringdom)
 
 The [W3C DOM](http://www.w3.org/TR/REC-DOM-Level-1/) powered by text. Built on
 top of [htmlparser2](https://github.com/fb55/htmlparser2) and
