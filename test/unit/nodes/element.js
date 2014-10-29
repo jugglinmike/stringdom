@@ -86,6 +86,12 @@ suite('Element', function() {
 	});
 
 	suite('outerHTML', function() {
+		test('reading from "plain" element', function() {
+			var div = create('<div></div>');
+
+			assert.equal(div.outerHTML, '<div></div>');
+		});
+
 		test('creation of new element', function() {
 			var parent = create('<div><div></div></div>');
 			var origElem = parent.childNodes[0];
