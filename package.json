@@ -1,6 +1,6 @@
 {
   "name": "stringdom",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A W3C DOM implementation powered by text",
   "homepage": "https://github.com/jugglinmike/stringdom",
   "repository": {
