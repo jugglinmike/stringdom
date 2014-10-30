@@ -18,6 +18,20 @@ suite('document', function() {
 		});
 	});
 
+	suite('#write', function() {
+		test('does not normalize whitespace by default', function() {
+			var document = new Document();
+			document.write('    ');
+			assert.equal(document.documentElement.textContent, '    ');
+		});
+
+		test('normalizes whitespace with `normalizeWhitespace` option', function() {
+			var document = new Document({ normalizeWhitespace: true });
+			document.write('    ');
+			assert.equal(document.documentElement.textContent, ' ');
+		});
+	});
+
 	suite('#createElement', function() {
 		test('generic element', function() {
 			var document = new Document();
