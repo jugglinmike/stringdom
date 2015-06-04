@@ -50,6 +50,18 @@ suite('Element', function() {
 			});
 		});
 
+		suite('#querySelector', function() {
+			test('returns first matching node', function() {
+				var li = elem.querySelector('ul.b#unordered.c li');
+
+				assert.equal(li, elem.childNodes[0].childNodes[0]);
+			});
+
+			test('returns null for non-matching selector', function() {
+				assert.equal(elem.querySelector('#nomatch'), null);
+			});
+		});
+
 		suite('#querySelectorAll', function() {
 			test('multiple matching nodes', function() {
 				var lis = elem.querySelectorAll('ul.b#unordered.c li');
