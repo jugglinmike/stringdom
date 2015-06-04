@@ -18,6 +18,14 @@ suite('Element', function() {
 			);
 		});
 
+		suite('#querySelectorAll', function() {
+			test('css selector with tag name only', function() {
+				var lis = elem.querySelectorAll('li');
+
+				assert.equal(lis.length, 3);
+			});
+        });
+
 		suite('#getElementsByTagName', function() {
 			test('valid tag names', function() {
 				var lis = elem.getElementsByTagName('li');
