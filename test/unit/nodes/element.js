@@ -24,7 +24,7 @@ suite('Element', function() {
 
 				assert.equal(lis.length, 3);
 			});
-        });
+		});
 
 		suite('#querySelector', function() {
 			test('returns first matching node', function() {
@@ -33,7 +33,7 @@ suite('Element', function() {
 
 				assert.equal(li, lis[0]);
 			});
-        });
+		});
 
 		suite('#getElementsByTagName', function() {
 			test('valid tag names', function() {
