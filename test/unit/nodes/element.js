@@ -26,6 +26,15 @@ suite('Element', function() {
 			});
         });
 
+		suite('#querySelector', function() {
+			test('returns first matching node', function() {
+				var lis = elem.querySelectorAll('li');
+				var li = elem.querySelector('li');
+
+				assert.equal(li, lis[0]);
+			});
+        });
+
 		suite('#getElementsByTagName', function() {
 			test('valid tag names', function() {
 				var lis = elem.getElementsByTagName('li');
