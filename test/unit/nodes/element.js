@@ -49,6 +49,20 @@ suite('Element', function() {
 				assert.equal(elem.getElementById('unordered .c'), null);
 			});
 		});
+
+		suite('#querySelectorAll', function() {
+			test('multiple matching nodes', function() {
+				var lis = elem.querySelectorAll('ul.b#unordered.c li');
+
+				assert.equal(lis.length, 3);
+			});
+
+			test('zero nodes', function() {
+				var lis = elem.querySelectorAll('ul.b#unordered.c li.f');
+
+				assert.equal(lis.length, 0);
+			});
+		});
 	});
 
 	test('className', function() {
