@@ -18,22 +18,6 @@ suite('Element', function() {
 			);
 		});
 
-		suite('#querySelectorAll', function() {
-			test('css selector with tag name only', function() {
-				var lis = elem.querySelectorAll('li');
-
-				assert.equal(lis.length, 3);
-			});
-		});
-
-		suite('#querySelector', function() {
-			test('returns first matching node', function() {
-				var lis = elem.querySelectorAll('li');
-				var li = elem.querySelector('li');
-
-				assert.equal(li, lis[0]);
-			});
-		});
 
 		suite('#getElementsByTagName', function() {
 			test('valid tag names', function() {
@@ -64,6 +48,18 @@ suite('Element', function() {
 
 			test('invalid IDs', function() {
 				assert.equal(elem.getElementById('unordered .c'), null);
+			});
+		});
+
+		suite('#querySelector', function() {
+			test('returns first matching node', function() {
+				var li = elem.querySelector('ul.b#unordered.c li');
+
+				assert.equal(li, elem.childNodes[0].childNodes[0]);
+			});
+
+			test('returns null for non-matching selector', function() {
+				assert.equal(elem.querySelector('#nomatch'), null);
 			});
 		});
 
