@@ -18,6 +18,7 @@ suite('Element', function() {
 			);
 		});
 
+
 		suite('#getElementsByTagName', function() {
 			test('valid tag names', function() {
 				var lis = elem.getElementsByTagName('li');
