@@ -22,7 +22,7 @@
   "dependencies": {
     "htmlparser2": "^3.5.1",
     "dom-serializer": "0.0.1",
-    "CSSselect": "^0.7.0"
+    "css-select": "^1.2.0"
   },
   "devDependencies": {
     "mocha": "^1.20.1",
