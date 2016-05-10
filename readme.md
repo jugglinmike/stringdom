@@ -30,7 +30,7 @@ ul.innerHTML = '<li></li><li></li>';
 document.querySelectorAll('li')[0].textContent = 'toasted white bread';
 ul.lastChild.textContent = 'four fried chickens and Coke';
 
-ul.setAttriubute('class', 'orders');
+ul.setAttribute('class', 'orders');
 
 console.log(document.documentElement.innerHTML);
 // '<h1>Soul Food Cafe</h1><ul class="orders"><li>toasted white bread</li><li>four fried chickens and a Coke</li></ul>';
